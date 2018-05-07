@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="4dp"
+    android:paddingTop="4dp">
+
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/et_search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="12dp"
+        android:background="@android:color/transparent"
+        android:drawablePadding="4dp"
+        android:drawableStart="@drawable/ic_github"
+        android:hint="@string/et_github_handle_hint"
+        android:imeOptions="actionSearch"
+        android:includeFontPadding="true"
+        android:inputType="text"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/tv_error"
+        app:layout_constraintEnd_toStartOf="@+id/btn_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_search"
+        style="@style/Base.TextAppearance.AppCompat.Widget.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_search"
+        app:srcCompat="@drawable/ic_search" />
+
+    <ProgressBar
+        android:id="@+id/progress_view"
+        style="@android:style/Widget.DeviceDefault.ProgressBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_search"
+        app:layout_constraintEnd_toEndOf="@+id/btn_search"
+        app:layout_constraintStart_toStartOf="@+id/btn_search"
+        app:layout_constraintTop_toTopOf="@+id/btn_search" />
+
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="listOfRepos not found"
+        android:textColor="#d50000"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_search"
+        app:layout_constraintStart_toStartOf="@+id/et_search"
+        app:layout_constraintTop_toBottomOf="@+id/et_search" />
+
+
+</android.support.constraint.ConstraintLayout>

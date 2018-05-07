@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">GithubLookup</string>
+    <string name="et_github_handle_hint">Enter Github Handle</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textview">TextView</string>
+
+    <string name="et_github_prev_search">Previous Searches</string>
+    <string name="empty_search_history">No Previous Searches</string>
+
+
+    <string name="repository_progress_text">Loading Repositories</string>
+    <string name="repository_error_text">Problem in loading Repositories</string>
+    <string name="repository_empty_text">No more repository</string>
+
+
+</resources>

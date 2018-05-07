@@ -1,0 +1,42 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    ext {
+        kotlin_version = '1.2.41'
+        support_lib = '27.1.1'
+        retrofit_version = '2.4.0'
+        butter_knife_version = '8.8.1'
+        okhttp_version = '3.10.0'
+        timber_version = '4.6.0'
+        rxandroid_version = '2.0.2'
+        rxjava_version = '2.1.12'
+        rxkotlin_version = '2.2.0'
+        realm = "5.1.0"
+    }
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "io.realm:realm-gradle-plugin:$realm"
+        classpath 'io.fabric.tools:gradle:1.+'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
