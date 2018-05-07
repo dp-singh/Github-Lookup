@@ -10,7 +10,7 @@ A collection of samples using the [Architecture Components](https://developer.an
 - Paging (preview)
 
 
-A few other libs
+A few other libraries
 
 - Realm
 - Retrofit
@@ -19,7 +19,12 @@ A few other libs
 
 
 
-* **[APK Link](https://github.com/dp-singh/github_lookup/blob/master/app/release/app-release.apk)** - Download and run it on your device.
+
+Run the sample
+===============================
+You can download the latest sample APK from Google Play:
+
+<a target="_blank" href="https://play.google.com/store/apps/details?id=com.dpsingh.githublookup"><img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height="60"></a>
 
 
-
+* **[APK Link](https://github.com/dp-singh/github_lookup/blob/master/app/release/app-release.apk)** - Download the apk and run it on your device.
