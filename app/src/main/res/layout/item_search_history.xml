@@ -8,32 +8,64 @@
     android:layout_height="wrap_content">
 
 
-    <TextView
-        android:id="@+id/tv_item_content"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:drawableEnd="@drawable/ic_right_arrow"
-        android:drawablePadding="8dp"
-        android:padding="12dp"
-        android:textAlignment="textStart"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_avatar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:text="Previous searches" />
-
     <ImageView
         android:id="@+id/img_avatar"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
         android:layout_margin="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_item_content"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_github" />
+
+
+    <TextView
+        android:id="@+id/tv_item_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:padding="0dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvGithubHandle"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/img_avatar"
+        app:layout_constraintTop_toTopOf="@+id/img_avatar"
+        tools:text="Previous searches" />
+
+
+    <TextView
+        android:id="@+id/tvGithubHandle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:padding="0dp"
+        android:text="TextView"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_avatar"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/tv_item_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_content" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_right_arrow" />
 
 </android.support.constraint.ConstraintLayout>
 

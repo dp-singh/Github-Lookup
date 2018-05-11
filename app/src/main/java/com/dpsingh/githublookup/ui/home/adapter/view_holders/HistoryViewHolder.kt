@@ -12,7 +12,8 @@ class HistoryViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInfla
 
     fun bind(previousSearch: User?, listener: (user: User) -> Unit) {
         previousSearch?.run {
-            itemView.tv_item_content.text = previousSearch.login
+            itemView.tv_item_content.text = previousSearch.name
+            itemView.tvGithubHandle.text = previousSearch.login
             itemView.tv_item_content.setOnClickListener {
                 listener.invoke(previousSearch)
             }

@@ -73,7 +73,6 @@ class HomeFragment : DaggerFragment(), Observer<Response<User>> {
 
         rv_recent_search.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv_recent_search.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-
         adapter = GithubHistoryAdapter(listener = { this.onHistoryItemClick(it) })
         rv_recent_search.adapter = adapter
 
@@ -104,7 +103,7 @@ class HomeFragment : DaggerFragment(), Observer<Response<User>> {
     }
 
     private fun onHistoryItemClick(githubHandle: User) {
-        listener?.openDetailFragment(githubHandle)
+        searchUser(githubHandle.login)
     }
 
     interface OnFragmentInteractionListener {

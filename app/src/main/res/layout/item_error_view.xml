@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:padding="8dp">
 
@@ -17,18 +17,18 @@
         android:textStyle="bold" />
 
     <!--<ProgressBar-->
-        <!--android:id="@+id/progress_view"-->
-        <!--style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Inverse"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="32dp" />-->
+    <!--android:id="@+id/progress_view"-->
+    <!--style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Inverse"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="32dp" />-->
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/progress_view"
+        android:layout_width="wrap_content"
+        android:layout_height="84dp"
         app:lottie_autoPlay="true"
         app:lottie_fileName="loading.json"
-        app:lottie_loop="true"
-        android:layout_width="wrap_content"
-        android:layout_height="84dp" />
+        app:lottie_loop="true" />
 
 
     <Button
