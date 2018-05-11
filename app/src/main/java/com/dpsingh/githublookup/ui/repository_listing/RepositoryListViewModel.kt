@@ -38,8 +38,8 @@ class RepositoryListViewModel @Inject constructor(repoListRepository: RepoListRe
     }
 
     companion object {
-        const val INITIAL_LOAD_SIZE = 20
-        const val PAGE_SIZE = 10
-        const val PREFETCH_DISTANCE = 3
+        const val INITIAL_LOAD_SIZE = 15
+        const val PAGE_SIZE = 15
+        const val PREFETCH_DISTANCE = 8
     }
 }

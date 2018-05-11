@@ -21,7 +21,7 @@ class StateLayoutViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutI
 
     fun showProgressView(@StringRes value: Int) {
         itemView.tvStatus.setText(value)
-        itemView.tvStatus.visibility = View.VISIBLE
+        itemView.tvStatus.visibility = View.GONE
         itemView.btn_retry.visibility = View.GONE
         itemView.progress_view.visibility = View.VISIBLE
     }
