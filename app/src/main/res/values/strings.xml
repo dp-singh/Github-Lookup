@@ -14,5 +14,7 @@
     <string name="repository_error_text">Problem in loading Repositories</string>
     <string name="repository_empty_text">No more repository</string>
 
+    <string name="transitionName">transitiontext</string>
+    <string name="transitionImage">transitionimage</string>
 
 </resources>

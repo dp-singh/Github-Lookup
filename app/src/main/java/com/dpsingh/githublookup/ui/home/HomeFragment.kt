@@ -15,6 +15,7 @@ import com.dpsingh.githublookup.data.remote.response.Response
 import com.dpsingh.githublookup.domain.model.User
 import com.dpsingh.githublookup.extensions.whenNotNull
 import com.dpsingh.githublookup.ui.home.adapter.GithubHistoryAdapter
+import com.dpsingh.githublookup.ui.home.adapter.view_holders.HistoryViewHolder
 import com.dpsingh.githublookup.utils.EspressoIdlingResource
 import com.dpsingh.githublookup.utils.ViewState
 import dagger.android.support.DaggerFragment
@@ -38,7 +39,7 @@ class HomeFragment : DaggerFragment(), Observer<Response<User>> {
                     listener?.openDetailFragment(it.data!!)
                     viewModel.response.value = null
                     searchView.showSearchBox(this@HomeFragment::searchUser)
-                    EspressoIdlingResource.decrement();
+                    EspressoIdlingResource.decrement()
                 }
                 ViewState.LOADING -> {
                     searchView.showProgress()
@@ -73,7 +74,8 @@ class HomeFragment : DaggerFragment(), Observer<Response<User>> {
 
         rv_recent_search.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv_recent_search.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-        adapter = GithubHistoryAdapter(listener = { this.onHistoryItemClick(it) })
+
+        adapter = GithubHistoryAdapter(listener = this::onHistoryItemClick)
         rv_recent_search.adapter = adapter
 
         searchView.showSearchBox(this@HomeFragment::searchUser)
@@ -102,12 +104,13 @@ class HomeFragment : DaggerFragment(), Observer<Response<User>> {
         listener = null
     }
 
-    private fun onHistoryItemClick(githubHandle: User) {
-        searchUser(githubHandle.login)
+    private fun onHistoryItemClick(githubHandle: User, historyViewHolder: HistoryViewHolder) {
+        listener?.openDetailFragment(githubHandle, historyViewHolder)
     }
 
     interface OnFragmentInteractionListener {
         fun openDetailFragment(githubHandle: User)
+        fun openDetailFragment(githubHandle: User, historyViewHolder: HistoryViewHolder)
     }
 
     companion object {

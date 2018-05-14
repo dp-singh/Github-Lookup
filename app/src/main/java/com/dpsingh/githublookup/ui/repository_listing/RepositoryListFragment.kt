@@ -4,17 +4,22 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dpsingh.githublookup.R
 import com.dpsingh.githublookup.domain.model.User
 import com.dpsingh.githublookup.extensions.whenNotNull
+import com.dpsingh.githublookup.ui.custom_views.CustomSearchView
+import com.dpsingh.githublookup.ui.custom_views.UserView
 import com.dpsingh.githublookup.ui.repository_listing.adapter.RepositoryAdapter
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_repository_list.*
 import javax.inject.Inject
 

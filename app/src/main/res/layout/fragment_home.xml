@@ -15,7 +15,7 @@
         app:cardCornerRadius="@dimen/cardview_default_radius"
         app:elevation="4dp">
 
-        <com.dpsingh.githublookup.ui.custom_views.SearchView
+        <com.dpsingh.githublookup.ui.custom_views.CustomSearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

@@ -9,7 +9,7 @@ import com.dpsingh.githublookup.ui.home.adapter.view_holders.HistoryViewHolder
 import com.dpsingh.githublookup.ui.repository_listing.adapter.view_holders.StateLayoutViewHolder
 import com.dpsingh.githublookup.utils.ViewType
 
-class GithubHistoryAdapter(val listener: (search: User) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GithubHistoryAdapter(val listener: (search: User,historyViewHolder: HistoryViewHolder) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var users = mutableListOf<User>()
         set(value) {
@@ -33,6 +33,7 @@ class GithubHistoryAdapter(val listener: (search: User) -> Unit) : RecyclerView.
             else -> ViewType.CONTENT
         }
     }
+
 
     override fun getItemCount(): Int = users.size + 1
 

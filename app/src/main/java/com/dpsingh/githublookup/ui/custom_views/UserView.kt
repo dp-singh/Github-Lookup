@@ -1,6 +1,7 @@
 package com.dpsingh.githublookup.ui.custom_views
 
 import android.content.Context
+import android.os.Build
 import android.support.constraint.ConstraintLayout
 import android.text.SpannableString
 import android.text.Spanned
@@ -8,6 +9,8 @@ import android.text.TextUtils
 import android.text.style.AbsoluteSizeSpan
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
 import com.dpsingh.githublookup.GlideApp
 import com.dpsingh.githublookup.R
 import com.dpsingh.githublookup.domain.model.User

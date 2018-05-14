@@ -11,7 +11,7 @@ import com.dpsingh.githublookup.R
 import com.dpsingh.githublookup.extensions.customMessage
 import kotlinx.android.synthetic.main.view_search.view.*
 
-class SearchView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
+class CustomSearchView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_search, this, true)

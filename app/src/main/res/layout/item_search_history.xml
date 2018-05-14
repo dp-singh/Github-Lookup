@@ -5,7 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
 
 
     <ImageView
@@ -15,6 +18,8 @@
         android:layout_margin="12dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:clickable="false"
+        android:transitionName="@string/transitionImage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_item_content"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -29,10 +34,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:clickable="false"
         android:padding="0dp"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:transitionName="@string/transitionName"
         app:layout_constraintBottom_toTopOf="@+id/tvGithubHandle"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toEndOf="@+id/img_avatar"
@@ -46,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        android:clickable="false"
         android:padding="0dp"
         android:text="TextView"
         android:textSize="14sp"
@@ -61,6 +69,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
+        android:clickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintEnd_toEndOf="parent"
