@@ -27,19 +27,19 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     signingConfigs {
-        config {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storePassword keystoreProperties['storePassword']
-            storeFile file(keystoreProperties['storeFile'])
-        }
+//        config {
+//            keyAlias keystoreProperties['keyAlias']
+//            keyPassword keystoreProperties['keyPassword']
+//            storePassword keystoreProperties['storePassword']
+//            storeFile file(keystoreProperties['storeFile'])
+//        }
     }
 
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+//            signingConfig signingConfigs.config
         }
     }
 
@@ -63,7 +63,9 @@ dependencies {
     implementation 'android.arch.lifecycle:viewmodel:1.1.1'
 
     //Paging
-    implementation 'android.arch.paging:runtime:1.0.0'
+    implementation 'android.arch.paging:runtime:1.0.1'
+    implementation "android.arch.paging:rxjava2:1.0.1"
+
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     kapt 'com.github.bumptech.glide:compiler:4.7.1'
 

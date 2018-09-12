@@ -1,28 +1,34 @@
 package com.dpsingh.githublookup.ui.repository_listing
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.ViewModel
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
+import com.dpsingh.githublookup.data.local.PagingInterface
 import com.dpsingh.githublookup.data.local.RepoDataSource
 import com.dpsingh.githublookup.domain.model.Repository
 import com.dpsingh.githublookup.domain.repository.RepoListRepository
-import com.dpsingh.githublookup.schedulers.BaseScheduler
-import com.dpsingh.githublookup.ui.base.BaseViewModel
+import io.reactivex.Single
 import javax.inject.Inject
 
-class RepositoryListViewModel @Inject constructor(repoListRepository: RepoListRepository,
-                                                  scheduler: BaseScheduler) : BaseViewModel<Int>() {
+class RepositoryListViewModel @Inject constructor(private var repoListRepository: RepoListRepository) : PagingViewModel<Repository>() {
 
-
-    var repoDataSource: RepoDataSource
-    var repository: LiveData<PagedList<Repository>>
+    override var data: String?=null
 
     fun setUserName(userName: String) {
-        repoDataSource.userName = userName
+        this.data = userName
     }
 
-    fun getResponseData() = repoDataSource.response
-    fun retry() = repoDataSource.retry()
+    override fun getPagingRepoCall(data: String, currentPage: Long, numberOfItems: Int): Single<List<Repository>> {
+        return repoListRepository.getRepository(data, currentPage, numberOfItems)
+    }
+}
+
+
+
+abstract class PagingViewModel<T> : ViewModel(), PagingInterface<T>{
+    private var repoDataSource: RepoDataSource<T>
+    var repository: LiveData<PagedList<T>>
 
     init {
         val config = PagedList.Config.Builder()
@@ -32,9 +38,19 @@ class RepositoryListViewModel @Inject constructor(repoListRepository: RepoListRe
                 .setPrefetchDistance(PREFETCH_DISTANCE)
                 .build()
 
-        repoDataSource = RepoDataSource(scheduler, repoListRepository)
-        repository = LivePagedListBuilder<Long, Repository>(repoDataSource, config).build()
+        repoDataSource = RepoDataSource(this)
+        repository = LivePagedListBuilder<Long, T>(repoDataSource, config).build()
 
+    }
+
+    fun retry() = repoDataSource.retry()
+
+    fun getResponseData() = repoDataSource.response
+
+
+    override fun onCleared() {
+        super.onCleared()
+        repoDataSource.clearTask()
     }
 
     companion object {

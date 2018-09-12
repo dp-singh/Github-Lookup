@@ -10,7 +10,7 @@ import retrofit2.http.Query
 public interface Api {
 
     @GET("users/{user_name}/repos")
-    fun getRepository(@Path("user_name") userName: String, @Query("page") page: Int = 1, @Query("per_page") per_page: Int = 10): Single<List<Repository>>
+    fun getRepository(@Path("user_name") userName: String, @Query("page") page: Long = 1, @Query("per_page") per_page: Int = 10): Single<List<Repository>>
 
 
     @GET("users/{user_name}")

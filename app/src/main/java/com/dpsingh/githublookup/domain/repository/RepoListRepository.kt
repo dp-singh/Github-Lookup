@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 open class RepoListRepository @Inject constructor(private val api: Api) {
 
-    fun getRepository(userName: String, startPage: Int = 1, numberOfItems: Int = 10): Single<List<Repository>> {
+    fun getRepository(userName: String, startPage: Long = 1, numberOfItems: Int = 10): Single<List<Repository>> {
         return api.getRepository(userName, startPage, numberOfItems)
     }
 }

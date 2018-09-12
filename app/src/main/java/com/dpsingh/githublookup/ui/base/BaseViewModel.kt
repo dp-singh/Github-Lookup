@@ -6,8 +6,5 @@ import com.dpsingh.githublookup.data.remote.response.Response
 
 
 abstract class BaseViewModel<T> : ViewModel() {
-
     val response: MutableLiveData<Response<T>> = MutableLiveData()
-
-
 }
