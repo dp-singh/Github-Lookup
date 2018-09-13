@@ -1,19 +1,22 @@
 package com.dpsingh.githublookup.ui.repository_listing
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
 import com.dpsingh.githublookup.data.local.PagingInterface
+import com.dpsingh.githublookup.data.local.PagingState
 import com.dpsingh.githublookup.data.local.RepoDataSource
 import com.dpsingh.githublookup.domain.model.Repository
 import com.dpsingh.githublookup.domain.repository.RepoListRepository
+import com.dpsingh.githublookup.utils.ViewState
 import io.reactivex.Single
 import javax.inject.Inject
 
 class RepositoryListViewModel @Inject constructor(private var repoListRepository: RepoListRepository) : PagingViewModel<Repository>() {
 
-    override var data: String?=null
+    override var data: String? = null
 
     fun setUserName(userName: String) {
         this.data = userName
@@ -25,10 +28,12 @@ class RepositoryListViewModel @Inject constructor(private var repoListRepository
 }
 
 
+abstract class PagingViewModel<T> : ViewModel(), PagingInterface<T> {
 
-abstract class PagingViewModel<T> : ViewModel(), PagingInterface<T>{
+     val reposeData: MediatorLiveData<PagingState<T>> = MediatorLiveData()
+
     private var repoDataSource: RepoDataSource<T>
-    var repository: LiveData<PagedList<T>>
+    private var repository: LiveData<PagedList<T>>
 
     init {
         val config = PagedList.Config.Builder()
@@ -38,14 +43,20 @@ abstract class PagingViewModel<T> : ViewModel(), PagingInterface<T>{
                 .setPrefetchDistance(PREFETCH_DISTANCE)
                 .build()
 
-        repoDataSource = RepoDataSource(this)
+        repoDataSource = RepoDataSource(callingInterface = this)
         repository = LivePagedListBuilder<Long, T>(repoDataSource, config).build()
 
+        reposeData.addSource(repository) { pageList: PagedList<T>? ->
+            reposeData.value = pageList?.let { PagingState(state = ViewState.SUCCESS, data = pageList) }
+        }
+        reposeData.addSource(repoDataSource.response) {
+            reposeData.value = it
+        }
     }
 
     fun retry() = repoDataSource.retry()
 
-    fun getResponseData() = repoDataSource.response
+    fun reset() = repoDataSource.invalidate();
 
 
     override fun onCleared() {
@@ -54,7 +65,7 @@ abstract class PagingViewModel<T> : ViewModel(), PagingInterface<T>{
     }
 
     companion object {
-        const val INITIAL_LOAD_SIZE = 15
+        const val INITIAL_LOAD_SIZE = 10
         const val PAGE_SIZE = 15
         const val PREFETCH_DISTANCE = 8
     }

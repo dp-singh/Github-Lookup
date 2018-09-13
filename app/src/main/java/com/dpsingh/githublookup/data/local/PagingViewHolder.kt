@@ -8,22 +8,16 @@ import com.dpsingh.githublookup.R
 import com.dpsingh.githublookup.ui.repository_listing.adapter.view_holders.StateLayoutViewHolder
 import com.dpsingh.githublookup.utils.ViewState
 
-abstract class PagingViewHolder<T>(DIFF_CALLBACK: DiffUtil.ItemCallback<T>, private var retry: () -> Unit) : PagedListAdapter<T, RecyclerView.ViewHolder>(DIFF_CALLBACK){
+abstract class PagingViewHolder<T>(DIFF_CALLBACK: DiffUtil.ItemCallback<T>, private var retry: () -> Unit) : PagedListAdapter<T, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
 
     private var state: Int = ViewState.LOADING
 
-    fun setStateValue(state: Int) {
-
-        //do not update adapter again
-        if (state == this.state) return
-
-        //check before setting state is extra column is showing
+    fun setPagingState(pagingState: PagingState<T>) {
         val extraShowing = hasExtra()
-        this.state = state
-
-
-        when (this.state) {
+        //check before setting state is extra column is showing
+        this.state = pagingState.state
+        when (pagingState.state) {
             ViewState.LOADING -> {
                 if (extraShowing)
                     notifyItemChanged(itemCount)
@@ -40,6 +34,7 @@ abstract class PagingViewHolder<T>(DIFF_CALLBACK: DiffUtil.ItemCallback<T>, priv
                 if (extraShowing) {
                     notifyItemRemoved(itemCount + 1)
                 }
+                submitList(pagingState.data)
             }
             ViewState.COMPLETE -> {
                 if (extraShowing) {
@@ -52,9 +47,7 @@ abstract class PagingViewHolder<T>(DIFF_CALLBACK: DiffUtil.ItemCallback<T>, priv
 
     override fun getItemViewType(position: Int): Int = if (hasExtra() && position == super.getItemCount()) state else ViewState.SUCCESS
 
-
     private fun hasExtra(): Boolean = ViewState.ERROR == state || ViewState.LOADING == state
-
 
     override fun getItemCount(): Int = super.getItemCount() + if (hasExtra()) 1 else 0
 
@@ -64,19 +57,19 @@ abstract class PagingViewHolder<T>(DIFF_CALLBACK: DiffUtil.ItemCallback<T>, priv
                 ViewState.LOADING -> holder.showProgressView(R.string.repository_progress_text)
                 ViewState.ERROR -> holder.showErrorView(R.string.repository_error_text, retry)
             }
-            else -> handleBindView(holder,position)
+            else -> handleBindView(holder, position)
         }
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ViewState.ERROR -> StateLayoutViewHolder(parent)
             ViewState.LOADING -> StateLayoutViewHolder(parent)
-            else -> handleOnCreateViewHolder(parent,viewType)
+            else -> handleOnCreateViewHolder(parent, viewType)
         }
     }
 
     abstract fun handleBindView(holder: RecyclerView.ViewHolder, position: Int)
-    abstract fun handleOnCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.ViewHolder
+
+    abstract fun handleOnCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
 }

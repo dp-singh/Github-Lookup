@@ -13,12 +13,12 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 
-class DataSourcePaging<T> constructor(val repository: PagingInterface<T>, val response: MutableLiveData<Response<Int>>, var position: Long = 1) : PageKeyedDataSource<Long, T>(){
+class DataSourcePaging<T> constructor(val repository: PagingInterface<T>, val response: MutableLiveData<PagingState<T>>, var position: Long = 1) : PageKeyedDataSource<Long, T>() {
 
 
-    override fun loadInitial(params: LoadInitialParams<Long>, callback: LoadInitialCallback<Long, T>) =fetchData(params.requestedLoadSize, callbackInitial= callback)
+    override fun loadInitial(params: LoadInitialParams<Long>, callback: LoadInitialCallback<Long, T>) = fetchData(params.requestedLoadSize, callbackInitial = callback)
 
-    override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, T>) =fetchData(params.requestedLoadSize, callback=callback)
+    override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<Long, T>) = fetchData(params.requestedLoadSize, callback = callback)
 
     override fun loadBefore(params: LoadParams<Long>, callback: LoadCallback<Long, T>) {}
 
@@ -39,22 +39,21 @@ class DataSourcePaging<T> constructor(val repository: PagingInterface<T>, val re
     }
 
 
-    private fun fetchData(requestedLoadSize: Int, callbackInitial: LoadInitialCallback<Long,T>?=null,callback: LoadCallback<Long, T>?=null) {
+    private fun fetchData(requestedLoadSize: Int, callbackInitial: LoadInitialCallback<Long, T>? = null, callback: LoadCallback<Long, T>? = null) {
         repository.getPagingRepoCall(repository.getSearchData(), position, 30)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { response.postValue(Response(ViewState.LOADING)) }
+                .doOnSubscribe { response.postValue(PagingState(state = ViewState.LOADING)) }
                 .subscribeBy(
                         onSuccess = {
-                            response.postValue(Response(ViewState.SUCCESS))
                             position++
-                            callback?.onResult(it,position)
-                            callbackInitial?.onResult(it,null,position)
+                            callback?.onResult(it, position)
+                            callbackInitial?.onResult(it, null, position)
                             setRetry(null)
                         },
                         onError = {
-                            response.postValue(Response(ViewState.ERROR, error = it))
-                            setRetry(Action { fetchData(requestedLoadSize, callbackInitial,callback) })
+                            response.postValue(PagingState(state = ViewState.ERROR, error = it))
+                            setRetry(Action { fetchData(requestedLoadSize, callbackInitial, callback) })
                         }
                 ).addTo(disposable)
     }

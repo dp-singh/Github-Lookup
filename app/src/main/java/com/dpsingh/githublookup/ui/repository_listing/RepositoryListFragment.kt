@@ -4,22 +4,17 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dpsingh.githublookup.R
 import com.dpsingh.githublookup.domain.model.User
 import com.dpsingh.githublookup.extensions.whenNotNull
-import com.dpsingh.githublookup.ui.custom_views.CustomSearchView
-import com.dpsingh.githublookup.ui.custom_views.UserView
 import com.dpsingh.githublookup.ui.repository_listing.adapter.RepositoryAdapter
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_repository_list.*
 import javax.inject.Inject
 
@@ -38,7 +33,7 @@ class RepositoryListFragment : DaggerFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = RepositoryAdapter({ viewModel.retry() })
+        adapter = RepositoryAdapter { viewModel.retry() }
         arguments.whenNotNull {
             githubHandle = it.getParcelable(ARG_GITHUB_HANDLE)
             viewModel = ViewModelProviders.of(this, viewModelFactory).get(RepositoryListViewModel::class.java)
@@ -60,11 +55,12 @@ class RepositoryListFragment : DaggerFragment() {
         rv_repos.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         rv_repos.adapter = adapter
 
-        githubHandle.whenNotNull {
-            userView.bind(it)
-            viewModel.setUserName(it.login)
-            viewModel.repository.observe(this, Observer { list -> list.whenNotNull { adapter.submitList(list) } })
-            viewModel.getResponseData().observe(this, Observer { value -> value.whenNotNull { adapter.setStateValue(it.status) } })
+        githubHandle.whenNotNull { user ->
+            userView.bind(user)
+            viewModel.setUserName(user.login)
+            viewModel.reposeData.observe(this, Observer {
+                it?.let(adapter::setPagingState)
+            })
         }
     }
 
