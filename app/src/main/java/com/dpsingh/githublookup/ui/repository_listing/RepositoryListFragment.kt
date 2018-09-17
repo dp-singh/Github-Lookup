@@ -16,6 +16,7 @@ import com.dpsingh.githublookup.extensions.whenNotNull
 import com.dpsingh.githublookup.ui.repository_listing.adapter.RepositoryAdapter
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_repository_list.*
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -49,7 +50,7 @@ class RepositoryListFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         main_toolbar.setNavigationIcon(R.drawable.ic_arrow)
-        main_toolbar.setNavigationOnClickListener({ listener?.onBackPress() })
+        main_toolbar.setNavigationOnClickListener { listener?.onBackPress() }
 
         rv_repos.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
         rv_repos.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
@@ -58,7 +59,8 @@ class RepositoryListFragment : DaggerFragment() {
         githubHandle.whenNotNull { user ->
             userView.bind(user)
             viewModel.setUserName(user.login)
-            viewModel.reposeData.observe(this, Observer {
+            viewModel.response().observe(this, Observer {
+                Timber.e("Log"+it.toString())
                 it?.let(adapter::setPagingState)
             })
         }

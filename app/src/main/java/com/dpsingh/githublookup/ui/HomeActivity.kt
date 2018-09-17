@@ -43,38 +43,38 @@ class HomeActivity : DaggerAppCompatActivity(), HomeFragment.OnFragmentInteracti
     }
 
     override fun openDetailFragment(githubHandle: User, historyViewHolder: HistoryViewHolder) {
-
-        // Check that the device is running lollipop
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val fragmentOne: Fragment = supportFragmentManager.findFragmentByTag(HomeFragment.TAG)
-            val fragmentTwo: Fragment = RepositoryListFragment.newInstance(githubHandle)
-
-            // Inflate transitions to apply
-            val changeTransform = TransitionInflater.from(this).inflateTransition(R.transition.change_image_transform)
-
-            // Setup exit transition on first fragment
-            fragmentOne.sharedElementReturnTransition = changeTransform
-            fragmentOne.exitTransition = TransitionInflater.from(this).inflateTransition(android.R.transition.slide_left)
-
-            // Setup enter transition on second fragment
-            fragmentTwo.sharedElementEnterTransition = changeTransform
-            fragmentTwo.enterTransition = TransitionInflater.from(this).inflateTransition(android.R.transition.slide_right)
-
-
-            // Add second fragment by replacing first
-            val ft = supportFragmentManager.beginTransaction()
-                    .replace(android.R.id.content, fragmentTwo)
-                    .addToBackStack(null)
-                    .addSharedElement(historyViewHolder.getImage(), historyViewHolder.getImage().transitionName)
-                    .addSharedElement(historyViewHolder.getTextView(), historyViewHolder.getTextView().transitionName)
-            // Apply the transaction
-            ft.commit()
-        } else {
+//
+//        // Check that the device is running lollipop
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            val fragmentOne: Fragment = supportFragmentManager.findFragmentByTag(HomeFragment.TAG)
+//            val fragmentTwo: Fragment = RepositoryListFragment.newInstance(githubHandle)
+//
+//            // Inflate transitions to apply
+//            val changeTransform = TransitionInflater.from(this).inflateTransition(R.transition.change_image_transform)
+//
+//            // Setup exit transition on first fragment
+//            fragmentOne.sharedElementReturnTransition = changeTransform
+//            fragmentOne.exitTransition = TransitionInflater.from(this).inflateTransition(android.R.transition.slide_left)
+//
+//            // Setup enter transition on second fragment
+//            fragmentTwo.sharedElementEnterTransition = changeTransform
+//            fragmentTwo.enterTransition = TransitionInflater.from(this).inflateTransition(android.R.transition.slide_right)
+//
+//
+//            // Add second fragment by replacing first
+//            val ft = supportFragmentManager.beginTransaction()
+//                    .replace(android.R.id.content, fragmentTwo)
+//                    .addToBackStack(null)
+//                    .addSharedElement(historyViewHolder.getImage(), historyViewHolder.getImage().transitionName)
+//                    .addSharedElement(historyViewHolder.getTextView(), historyViewHolder.getTextView().transitionName)
+//            // Apply the transaction
+//            ft.commit()
+//        } else {
             supportFragmentManager.beginTransaction()
                     .add(android.R.id.content, RepositoryListFragment.newInstance(githubHandle), RepositoryListFragment.TAG)
                     .addToBackStack(null)
                     .commit()
-        }
+//        }
     }
 }
 

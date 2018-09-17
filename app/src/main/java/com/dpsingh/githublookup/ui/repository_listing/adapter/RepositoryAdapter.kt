@@ -8,13 +8,14 @@ import com.dpsingh.githublookup.domain.model.Repository
 import com.dpsingh.githublookup.ui.repository_listing.adapter.view_holders.RepositoryViewHolder
 
 
-class RepositoryAdapter(retry: () -> Unit) : PagingViewHolder<Repository>(DIFF_CALLBACK,retry) {
+class RepositoryAdapter(retry: () -> Unit) : PagingViewHolder<Repository>(DIFF_CALLBACK, retry) {
+
     override fun handleBindView(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as RepositoryViewHolder).bindTo(getItem(position))
     }
 
     override fun handleOnCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-       return RepositoryViewHolder(parent)
+        return RepositoryViewHolder(parent)
     }
 
     companion object {

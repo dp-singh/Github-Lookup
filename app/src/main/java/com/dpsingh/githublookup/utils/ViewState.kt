@@ -7,6 +7,8 @@ class ViewState {
         const val ERROR = 2
         const val SUCCESS = 3
         const val COMPLETE = 4
+        const val EMPTY=5
+        const val UNKNOWN=6
     }
 }
 

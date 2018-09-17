@@ -1,7 +1,5 @@
 package com.dpsingh.githublookup.ui.repository_listing
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
@@ -30,34 +28,30 @@ class RepositoryListViewModel @Inject constructor(private var repoListRepository
 
 abstract class PagingViewModel<T> : ViewModel(), PagingInterface<T> {
 
-     val reposeData: MediatorLiveData<PagingState<T>> = MediatorLiveData()
+    private val config = PagedList.Config.Builder()
+            .setInitialLoadSizeHint(INITIAL_LOAD_SIZE)
+            .setPageSize(PAGE_SIZE)
+            .setEnablePlaceholders(false)
+            .setPrefetchDistance(PREFETCH_DISTANCE)
+            .build()
 
-    private var repoDataSource: RepoDataSource<T>
-    private var repository: LiveData<PagedList<T>>
 
-    init {
-        val config = PagedList.Config.Builder()
-                .setInitialLoadSizeHint(INITIAL_LOAD_SIZE)
-                .setPageSize(PAGE_SIZE)
-                .setEnablePlaceholders(false)
-                .setPrefetchDistance(PREFETCH_DISTANCE)
-                .build()
-
-        repoDataSource = RepoDataSource(callingInterface = this)
-        repository = LivePagedListBuilder<Long, T>(repoDataSource, config).build()
-
-        reposeData.addSource(repository) { pageList: PagedList<T>? ->
-            reposeData.value = pageList?.let { PagingState(state = ViewState.SUCCESS, data = pageList) }
-        }
-        reposeData.addSource(repoDataSource.response) {
-            reposeData.value = it
+    private val repoDataSource: RepoDataSource<T> by lazy {
+        return@lazy RepoDataSource(callingInterface = this).apply {
+            //create a repository instance
+            val livePageBuilder = LivePagedListBuilder<Long, T>(this, config).build()
+            //map the builder data to get transformed in paging state
+            response.addSource(livePageBuilder) { pageList: PagedList<T>? ->
+                response.value = PagingState(ViewState.SUCCESS, pageList)
+            }
         }
     }
 
+    fun response() = repoDataSource.response
+
     fun retry() = repoDataSource.retry()
 
-    fun reset() = repoDataSource.invalidate();
-
+    fun reset() = repoDataSource.invalidate()
 
     override fun onCleared() {
         super.onCleared()
@@ -66,7 +60,8 @@ abstract class PagingViewModel<T> : ViewModel(), PagingInterface<T> {
 
     companion object {
         const val INITIAL_LOAD_SIZE = 10
-        const val PAGE_SIZE = 15
-        const val PREFETCH_DISTANCE = 8
+        const val PAGE_SIZE = 10
+        const val PREFETCH_DISTANCE = 10
     }
 }
+
