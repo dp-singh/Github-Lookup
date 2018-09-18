@@ -16,7 +16,6 @@ import com.dpsingh.githublookup.extensions.whenNotNull
 import com.dpsingh.githublookup.ui.repository_listing.adapter.RepositoryAdapter
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_repository_list.*
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -60,7 +59,6 @@ class RepositoryListFragment : DaggerFragment() {
             userView.bind(user)
             viewModel.setUserName(user.login)
             viewModel.response().observe(this, Observer {
-                Timber.e("Log"+it.toString())
                 it?.let(adapter::setPagingState)
             })
         }

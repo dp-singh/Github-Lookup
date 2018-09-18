@@ -3,12 +3,12 @@ package com.dpsingh.githublookup.ui.repository_listing.adapter
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.dpsingh.githublookup.data.local.PagingViewHolder
+import com.dpsingh.githublookup.data.local.PagingAdapter
 import com.dpsingh.githublookup.domain.model.Repository
 import com.dpsingh.githublookup.ui.repository_listing.adapter.view_holders.RepositoryViewHolder
 
 
-class RepositoryAdapter(retry: () -> Unit) : PagingViewHolder<Repository>(DIFF_CALLBACK, retry) {
+class RepositoryAdapter(retry: () -> Unit) : PagingAdapter<Repository>(DIFF_CALLBACK, retry) {
 
     override fun handleBindView(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as RepositoryViewHolder).bindTo(getItem(position))

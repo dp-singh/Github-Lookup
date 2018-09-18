@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.dpsingh.githublookup.ui.repository_listing.adapter.view_holders.StateLayoutViewHolder
 import com.dpsingh.githublookup.utils.ViewState
 
-abstract class PagingViewHolder<T>(DIFF_CALLBACK: DiffUtil.ItemCallback<T>, private var retry: () -> Unit) : PagedListAdapter<T, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+abstract class PagingAdapter<T>(DIFF_CALLBACK: DiffUtil.ItemCallback<T>, private var retry: () -> Unit) : PagedListAdapter<T, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     private var state: Int = ViewState.LOADING
 
