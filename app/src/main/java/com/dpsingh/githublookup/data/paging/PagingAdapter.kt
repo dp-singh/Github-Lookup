@@ -1,4 +1,4 @@
-package com.dpsingh.githublookup.data.local
+package com.dpsingh.githublookup.data.paging
 
 import android.arch.paging.PagedListAdapter
 import android.support.v7.util.DiffUtil

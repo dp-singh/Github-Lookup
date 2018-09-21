@@ -3,9 +3,9 @@ package com.dpsingh.githublookup.ui.repository_listing
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
-import com.dpsingh.githublookup.data.local.PagingInterface
-import com.dpsingh.githublookup.data.local.PagingState
-import com.dpsingh.githublookup.data.local.RepoDataSource
+import com.dpsingh.githublookup.data.paging.PagingInterface
+import com.dpsingh.githublookup.data.paging.PagingState
+import com.dpsingh.githublookup.data.paging.DataSourceFactory
 import com.dpsingh.githublookup.domain.model.Repository
 import com.dpsingh.githublookup.domain.repository.RepoListRepository
 import com.dpsingh.githublookup.utils.ViewState
@@ -36,8 +36,8 @@ abstract class PagingViewModel<T> : ViewModel(), PagingInterface<T> {
             .build()
 
 
-    private val repoDataSource: RepoDataSource<T> by lazy {
-        return@lazy RepoDataSource(callingInterface = this).apply {
+    private val repoDataSource: DataSourceFactory<T> by lazy {
+        return@lazy DataSourceFactory(callingInterface = this).apply {
             //create a repository instance
             val livePageBuilder = LivePagedListBuilder<Long, T>(this, config).build()
             //map the builder data to get transformed in paging state

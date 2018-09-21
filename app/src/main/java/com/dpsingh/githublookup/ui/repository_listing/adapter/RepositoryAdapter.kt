@@ -3,7 +3,7 @@ package com.dpsingh.githublookup.ui.repository_listing.adapter
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.dpsingh.githublookup.data.local.PagingAdapter
+import com.dpsingh.githublookup.data.paging.PagingAdapter
 import com.dpsingh.githublookup.domain.model.Repository
 import com.dpsingh.githublookup.ui.repository_listing.adapter.view_holders.RepositoryViewHolder
 

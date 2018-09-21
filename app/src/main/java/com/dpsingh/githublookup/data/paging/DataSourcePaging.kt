@@ -1,4 +1,4 @@
-package com.dpsingh.githublookup.data.local
+package com.dpsingh.githublookup.data.paging
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.ItemKeyedDataSource
