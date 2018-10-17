@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "lifcare-ed1e1",
+  "private_key_id": "783baa8fdeafb0a1026f975e89d9e2f493d14a2b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDOmnwhIKpmsDcX\nqDn+DrJUCKWwj5qyaaPTxS/LfFSxGFrOZFnTw2oT9Dk6D6SyMkYF1mTA2or+Anil\nm9odnHQgcdY9fRofpu8ZU6Ip+3qJ+izy1BA773Sh+fysFlBlLmKXFd3KxmEPDKZ1\n2/nchwi2n2eBjS/fr+NPwx3CFrDIlRVtFofJEi6aTzGQDV8+V3iVUu75iwScR8Tm\nuWzbKy5qfxf8+YDrRV8z8As1uL0LjedlEy77sXhA+o5YBzgQUcQZh4uPGke6iadv\nKZTWiWqeYGa8d3NPIsPbSD4lmSwB4WbaCKBwsrNvOD0I8fS4NXNwRpOO/lpgI4/Y\nOkoNccP5AgMBAAECggEAHozzjAaDjBnEm8fxg2Ly9cAtmBU0H+vFIPyIm8Nv1pwu\nWVS3f7vmxLqZd792cC9E8XoJfgcTBIqjAoIwV66Z8W5D6uXD5ihONOWMFj8smJiY\n6vN2zxYSnh0UQvItwzh/ta2zFVgOZCZPux/jK7wACtk5egvBp4cfytykWt32GELH\nUgPW0EP3dTEIjtSGk6I6lpwYXQtdASCTjYE3nlj6v6yzhnSmexUNfaHO+5JMJp8m\nEqI4WRgkCxAQfoAw+is9X3P2XFKD12aAE/I7Ngesg/XHDwr6Otcl9giH6pO97oS+\nWEz1+n/3slJJqtpZKqG6l1+BwGj+WiTvwMjOdUDyTQKBgQDtpE7egzfS+qwMQKMf\nH4jGv58y8N3Z5mLvdpaCmSr4J10fBd1lrfs0msLxaJ/BiVay4tGn+EYX6/3Ph7qq\nndNUaYcMKW6Jdd1v0HvRnZXfbpO3Qf4kTPC+lTBz8/MIpn9xO3cFOTREE6CYDg7s\n/jj5uQzf6uTSGJ3QyfKsjF6tkwKBgQDekFm/aCxqBCojs9IwDhdOnpsrCAXzWwGw\nUi+5RGOPnHXrCi19b4u3Z8UVbrRzEh+fmyikzXbqpGRIS55THFF851yQMLxoVqBz\nC20k7efhNS5EQnGqyJJQKLtBRo2jBRbck1w2MFYlHtXa5FOx7VDX1Yx16I0Ok3Yp\n1nKJB65fwwKBgDI5hr26Z+L8Pb59LryWMpcmyqO+inTSH1jS7G5/prg5wZGb8LXb\ntnrgtpDE9va1axB1pa/lZhMKOmNRIV+L6a0ufG9Sll0Q/xLxsimUL6fAPBIALZFI\nfZ0Z9Nqc1WGfptGsqrP86hH1P/zDA96MwEfvF0x/3YqVz0zgUZysMhpnAoGADHd7\nf3w/WKTpE1zkPirb5Vx/BpcJdks3uf+wiqkpBodWF5dXWvpfkiNu57duxi9StCcF\nzM1xhs00jNQnhzJD4kI3biA8vX90t10BfRsSbQwEjnBGW7GmeHT/oDVqg6IqWKqs\ndKCagrPKeNtnUMUhTSW6G3SuSg26hbdsbP6QJu8CgYEAhPG0CNq6dLK2x2GjgN8e\nOPhTKrbJyjxmDEfC3Tqq+LGR+sjmJyRDNOugSBiIaOuTQ5nWicp0+HrNaRF+EwLq\nHEMAkbBN4zbqMV3YD+8fZK+xp3QAOkrTrkLX4dp+qrmqXZOlfb4/GORi7guekQ9k\nCoaBUc03nTJvEI7uMm0wVwY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "circle-ci@lifcare-ed1e1.iam.gserviceaccount.com",
+  "client_id": "100525606628655503375",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/circle-ci%40lifcare-ed1e1.iam.gserviceaccount.com"
+}
