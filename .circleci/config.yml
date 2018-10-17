@@ -30,42 +30,45 @@ jobs:
             path: app/build/test-results
 
   test:
-        docker:
-           - image: google/cloud-sdk  # gcloud is baked into this image
-        steps:
-          - run:
-              name: Build debug APK and release APK
-              command: |
-                ./gradlew :app:assembleDebug
-                ./gradlew :app:assembleDebugAndroidTest
-          - run:
-              name: Store Google Service Account
-              command: echo $GCLOUD_SERVICE_KEY > gcloud-service-key.json
-          - run:
-              name: Authorize gcloud and set config defaults
-              command: |
-                sudo gcloud auth activate-service-account --key-file=/gcloud-service-key.json
-                sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
-          - run:
-              name: Test with Firebase Test Lab
-              command: >
-                sudo gcloud firebase test android run
-                  --app <local_server_path>/<app_apk>.apk
-                  --test <local_server_path>/<app_test_apk>.apk
-                  --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
-          - run:
-              name: Install gsutil dependency and copy test results data
-              command: |
-                sudo pip install -U crcmod
+      docker:
+         - image: google/cloud-sdk  # gcloud is baked into this image
+      steps:
+        - run:
+            name: Build debug APK and release APK
+            command: |
+              ./gradlew :app:assembleDebug
+              ./gradlew :app:assembleDebugAndroidTest
+        - run:
+            name: Store Google Service Account
+            command: echo $GCLOUD_SERVICE_KEY > gcloud-service-key.json
+        - run:
+            name: Authorize gcloud and set config defaults
+            command: |
+              sudo gcloud auth activate-service-account --key-file=/gcloud-service-key.json
+              sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
+        - run:
+            name: Test with Firebase Test Lab
+            command: >
+              sudo gcloud firebase test android run
+                --app <local_server_path>/<app_apk>.apk
+                --test <local_server_path>/<app_test_apk>.apk
+                --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
+        - run:
+            name: Install gsutil dependency and copy test results data
+            command: |
+              sudo pip install -U crcmod
                 sudo gsutil -m cp -r -U `sudo gsutil ls gs://[BUCKET_NAME]/[OBJECT_NAME] | tail -1` ${CIRCLE_ARTIFACTS}/ | true
 workflows:
   version: 2
   build_and_test:
-      jobs:
-        -build
-        -test:
-          requires:
-            -build
+    jobs:
+      -build
+      -test:
+        requires:
+          -build
+        filters:
+          branches:
+            only: sequential-branch-filter
 
 
 
