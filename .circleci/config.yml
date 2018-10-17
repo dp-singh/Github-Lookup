@@ -1,6 +1,5 @@
 version: 2
-jobs:
-  build:
+build_project:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-28-alpha
@@ -28,7 +27,8 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
-  test:
+
+test_project:
       docker:
          - image: google/cloud-sdk  # gcloud is baked into this image
       steps:
@@ -57,4 +57,13 @@ jobs:
             command: |
               sudo pip install -U crcmod
               sudo gsutil -m cp -r -U `sudo gsutil ls gs://[BUCKET_NAME]/[OBJECT_NAME] | tail -1` ${CIRCLE_ARTIFACTS}/ | true
+
+
+workflows:
+  version: 2
+  workflow:
+      jobs:
+        -build_project
+        -test_project
+
 
