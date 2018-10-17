@@ -4,6 +4,7 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-28-alpha
+      - image:
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -30,7 +31,7 @@ jobs:
           path: app/build/test-results
       - run:
           name: Store Google Service Account
-          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+          command: echo $GCLOUD_SERVICE_KEY > /gcloud-service-key.json
       - run:
           name: Authorize gcloud and set config defaults
           command: |
