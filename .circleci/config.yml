@@ -36,19 +36,18 @@ jobs:
               ./gradlew :app:assembleDebugAndroidTest
         - run:
             name: Store Google Service Account
-            command: echo $GCLOUD_SERVICE_KEY > gcloud-service-key.json
+            command: echo $GCLOUD_SERVICE_KEY > app/gcloud-service-key.json
         - run:
             name: Authorize gcloud and set config defaults
             command: |
-              sudo gcloud auth activate-service-account --key-file=/gcloud-service-key.json
+              sudo gcloud auth activate-service-account --key-file=app/gcloud-service-key.json
               sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
         - run:
-            name: Test with Firebase Test Lab
-            command: >
-              sudo gcloud firebase test android run
-                --app <local_server_path>/<app_apk>.apk
-                --test <local_server_path>/<app_test_apk>.apk
-                --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
+            name: Run instrumented test on Firebase Test Lab
+            command: gcloud firebase test android run --type instrumentation --app app/build/outputs/apk/debug/mobile-debug.apk --test app/build/outputs/apk/androidTest/debug/mobile-debug-androidTest.apk --device model=sailfish,version=26,locale=en_US,orientation=portrait --environment-variables coverage=true,coverageFile=/sdcard/tmp/code-coverage/connected/coverage.ec --directories-to-pull=/sdcard/tmp --timeout 20m
+        - run:
+            name: Create directory to store test results
+            command: mkdir firebase
         - run:
             name: Install gsutil dependency and copy test results data
             command: |
