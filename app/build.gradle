@@ -7,15 +7,15 @@ apply plugin: 'io.fabric'
 
 
 // Load keystore
-def keystorePropertiesFile = rootProject.file("local.properties");
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+// def keystorePropertiesFile = rootProject.file("local.properties");
+// def keystoreProperties = new Properties()
+// keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 
 android {
 
     compileSdkVersion 27
-    buildToolsVersion '28.0.0 rc2'
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.dpsingh.githublookup"
         minSdkVersion 19
