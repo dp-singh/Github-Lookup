@@ -3,6 +3,8 @@ Android Architecture Components
 ===============================
 [![Build status](https://build.appcenter.ms/v0.1/apps/6ec1d3b4-632a-42b8-a2b2-8d75524d0cc1/branches/dp-singh-patch-1/badge)](https://appcenter.ms)
 
+
+
 A collection of samples using the [Architecture Components](https://developer.android.com/arch):
 
 - Lifecycle-aware components
